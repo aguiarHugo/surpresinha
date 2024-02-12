@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'button_colors.dart';
 
@@ -9,61 +7,67 @@ void showResultDialog(BuildContext context, Map<String, dynamic> result) {
 
   showDialog(
     context: context,
-    barrierColor: color,
+    barrierColor: color.withOpacity(0.8),
     builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(
-          '${result['loteria'].toUpperCase()}',
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: color,
-          ),
-        ),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text(
-                'Concurso: ${result['concurso']}',
-                style: const TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Text(
-                  'Data: ${result['data']}',
-                  style: const TextStyle(
-                    fontSize: 20,
+      return Dialog(
+        child: Stack(
+          alignment: Alignment.topRight, 
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 45, right: 10, left: 10, bottom: 10),
+              height: 300,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    result['loteria'].toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: color,
+                    ),
                   ),
-                ),
-              ),
-               Padding(
-               padding:  const EdgeInsets.only(top: 8),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 0),
-                child: Text(
-                  sortedNumbers,
-                  style: TextStyle(
-                    color: color,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold
+                  const SizedBox(height: 20),
+                  SingleChildScrollView(
+                    child: ListBody(
+                      children: <Widget>[
+                        Text(
+                          'Concurso: ${result['concurso']}',
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text(
+                            'Data: ${result['data']}',
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text(
+                            sortedNumbers,
+                            style: TextStyle(
+                              color: color,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
-              // Adicione mais campos conforme necessário
-            ],
-          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8, right: 8),
+              child: IconButton(
+                icon: const Icon(Icons.close, color: Colors.grey),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+          ],
         ),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('Fechar'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
       );
     },
   );
