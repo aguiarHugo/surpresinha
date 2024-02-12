@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: MyHomePage(title: 'Supresinha'),
+      home: MyHomePage(title: 'Surpresinha'),
     );
   }
 }
@@ -25,13 +25,31 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(title), centerTitle: true,
-      backgroundColor: Colors.green[300],),
+      backgroundColor: const Color(0xFF00ab69),),
       body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            LotteryButton(lotteryName: 'megasena'),
-            LotteryButton(lotteryName: 'lotofacil'),
+            Padding(
+              padding: EdgeInsets.only(bottom: 16.0),
+              child: LotteryButton(lotteryName: 'megasena'),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 16.0),
+              child: LotteryButton(lotteryName: 'lotofacil'),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 16.0),
+              child: LotteryButton(lotteryName: 'quina'),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 16.0),
+              child: LotteryButton(lotteryName: 'lotomania'),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 16.0),
+              child: LotteryButton(lotteryName: 'federal'),
+            ),
           ],
         ),
       ),
