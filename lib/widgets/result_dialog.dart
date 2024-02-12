@@ -1,16 +1,24 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'button_colors.dart';
 
 void showResultDialog(BuildContext context, Map<String, dynamic> result) {
   final sortedNumbers = (result['dezenas'] as List<dynamic>).join(', ');
+  final color = lotteryColors[result['loteria'].toLowerCase()] ?? Colors.grey;
 
   showDialog(
     context: context,
+    barrierColor: color,
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(
           '${result['loteria'].toUpperCase()}',
-          style: const TextStyle(
-              fontSize: 25, fontWeight: FontWeight.bold, color: Colors.green),
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: color,
+          ),
         ),
         content: SingleChildScrollView(
           child: ListBody(
@@ -30,12 +38,19 @@ void showResultDialog(BuildContext context, Map<String, dynamic> result) {
                   ),
                 ),
               ),
+               Padding(
+               padding:  const EdgeInsets.only(top: 8),
+              ),
               Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Text('Resultado: $sortedNumbers',
-                style: const TextStyle(
-                      fontSize: 20,
-                      ),),
+                padding: const EdgeInsets.only(top: 0),
+                child: Text(
+                  sortedNumbers,
+                  style: TextStyle(
+                    color: color,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
               ),
               // Adicione mais campos conforme necessário
             ],
