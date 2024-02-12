@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../widgets/result_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 Future<void> fetchLotteryResult(BuildContext context, String lottery) async {
   // Mostra o loader antes de iniciar a requisição HTTP
@@ -11,16 +12,13 @@ Future<void> fetchLotteryResult(BuildContext context, String lottery) async {
     context: context,
     barrierDismissible: false, // Impede que o dialog seja fechado ao tocar fora dele
     builder: (BuildContext context) {
-      return const Center(
+      return Center(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Row(
             mainAxisSize: MainAxisSize.min, // Usa o mínimo espaço necessário
             children: [
-              CircularProgressIndicator(
-                color: Color.fromARGB(255, 7, 243, 15),
-              ),
-              // Texto opcional
+                LoadingAnimationWidget.beat(color:const Color.fromARGB(255, 7, 243, 15), size: 50)
             ],
           ),
         ),
